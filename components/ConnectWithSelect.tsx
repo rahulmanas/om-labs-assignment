@@ -62,7 +62,7 @@ export function ConnectWithSelect({
   setError: (error: Error | undefined) => void;
 }) {
   const [desiredChainId, setDesiredChainId] = useState<number>(undefined);
-  const { setShowModal } = useGlobal();
+  const { setShowModal }: any = useGlobal();
 
   /**
    * When user connects eagerly (`desiredChainId` is undefined) or to the default chain (`desiredChainId` is -1),

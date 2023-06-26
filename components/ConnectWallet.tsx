@@ -11,7 +11,7 @@ import { Status } from "./Status";
 const { useAccounts, useIsActive, useProvider, useIsActivating } = hooks;
 
 export default function ConnectWallet() {
-  const { showModal, setShowModal } = useGlobal();
+  const { showModal, setShowModal }: any = useGlobal();
 
   const isActive = useIsActive();
   const isActivating = useIsActivating();
