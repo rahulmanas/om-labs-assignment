@@ -9,7 +9,7 @@ html {
 @tailwind utilities;
 
 .modal-wrapper {
-  @apply bg-swap-box text-white pb-4 border-1 border-solid border-swap-box;
+  @apply bg-swap-box text-white pb-4 border-1 border-solid border-swap-box rounded-xl;
   width: 500px;
   height: max-content;
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ChooseToken from "./ChooseToken";
 import {
   Token,
   TokenAmount,
@@ -10,9 +11,10 @@ import {
 } from "@uniswap/sdk";
 import { useGlobal } from "../hooks/useGlobal";
 import { formatEther } from "@ethersproject/units";
+import Modal from "./Modal/Modal";
 
 const TokenSwap = ({ isActive, balance }) => {
-  const { setShowModal } = useGlobal();
+  const { setShowModal, setShowTokenModal, showTokenModal } = useGlobal();
   const [fromTokenAddress, setFromTokenAddress] = useState("");
   const [toTokenAddress, setToTokenAddress] = useState("");
   const [fromAmount, setFromAmount] = useState("");
@@ -74,6 +76,8 @@ const TokenSwap = ({ isActive, balance }) => {
     }
   }, [balance]);
 
+  const { selectedToToken } = useGlobal();
+
   return (
     <div className="rounded-xl p-2 md:p-8 border-1 border-boundary border-solid bg-swap-box w-full md:w-1/2 mx-auto mt-12 space-y-4">
       <h2 className="text-white text-xl">Swap</h2>
@@ -90,10 +94,14 @@ const TokenSwap = ({ isActive, balance }) => {
                 placeholder="0"
               />
             </div>
+
             <div className="rounded-full col-span-2 md:col-span-1 cursor-pointer bg-swap-token py-2 px-4 ml-auto mr-1 md:mr-4">
-              <div className="space-x-2 flex items-center w-max">
-                <p>MAT</p>
-                <p className="text-xl">POL</p>
+              <div
+                className="space-x-2 flex items-center w-max"
+                onClick={() => setShowTokenModal(true)}
+              >
+                <p>{selectedToToken.shortName}</p>
+                <p className="text-xl">{selectedToToken.name}</p>
                 <svg
                   width="12"
                   height="7"
@@ -121,7 +129,16 @@ const TokenSwap = ({ isActive, balance }) => {
               )}
             </div>
           </div>
-          <div></div>
+          <div>
+            {showTokenModal && (
+              <Modal
+                title={"Select a token"}
+                onClose={() => setShowTokenModal(false)}
+              >
+                <ChooseToken />
+              </Modal>
+            )}
+          </div>
         </div>
         <div class="sc-11ce2lf-2 fcplJw">
           <div
