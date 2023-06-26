@@ -20,6 +20,9 @@ module.exports = {
       borderWidth: {
         1: "1px",
       },
+      width: {
+        125: "31.25rem",
+      },
     },
   },
   variants: {},
