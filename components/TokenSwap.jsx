@@ -113,7 +113,7 @@ const TokenSwap = ({ isActive, balance }) => {
                   <p>Ξ {maxVal}</p>
                   <button
                     className="text-blue-400"
-                    onClick={() => setFromAmount(maxVal)}
+                    onClick={() => setFromAmount(formatEther(balance[0]))}
                   >
                     Max
                   </button>

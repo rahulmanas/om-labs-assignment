@@ -1,3 +1,7 @@
+html {
+  color: white;
+}
+
 /* purgecss start ignore */
 @tailwind base;
 @tailwind components;
