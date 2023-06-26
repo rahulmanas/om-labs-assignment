@@ -1,6 +1,6 @@
-# TypeScript Next.js example
+# 0xPass Assignment
 
-This is an assignment by 0xLabs that connects to Dapp and have Uniswap like Layout for swapping
+This is an assignment by 0xPass that connects to Dapp and have Uniswap like Layout for swapping
 
 ## How to run?
 
