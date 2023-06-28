@@ -1,3 +1,4 @@
+import React from "react";
 import type { Web3ReactHooks } from "@web3-react/core";
 
 import type { MetaMask } from "@web3-react/metamask";
