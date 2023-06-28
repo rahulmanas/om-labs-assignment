@@ -1,14 +1,23 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-export const GlobalContext = createContext({});
+export const ModalManagerContext = createContext({});
 
-export function useGlobal() {
-  return useContext(GlobalContext);
+export function useModalManager() {
+  return useContext(ModalManagerContext);
 }
 
-export const GlobalProvider = ({ children }) => {
+export const ModalProvider = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
   const [showTokenModal, setShowTokenModal] = useState(false);
+
+  const handleShowModal = (val: boolean) => {
+    setShowModal(val);
+  };
+
+  const handleTokenModal = (val: boolean) => {
+    setShowTokenModal(val);
+  };
+
   const [selectedToToken, setSelectedToToken] = useState({
     id: 3,
     name: "Polygon",
@@ -19,17 +28,17 @@ export const GlobalProvider = ({ children }) => {
   });
 
   return (
-    <GlobalContext.Provider
+    <ModalManagerContext.Provider
       value={{
         showModal,
-        setShowModal,
+        handleShowModal,
+        handleTokenModal,
         showTokenModal,
-        setShowTokenModal,
         selectedToToken,
         setSelectedToToken,
       }}
     >
       {children}
-    </GlobalContext.Provider>
+    </ModalManagerContext.Provider>
   );
 };

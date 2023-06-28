@@ -9,12 +9,14 @@ import {
   Fetcher,
   TradeOptions,
 } from "@uniswap/sdk";
-import { useGlobal } from "../hooks/useGlobal";
+
 import { formatEther } from "@ethersproject/units";
 import Modal from "./Modal/Modal";
+import { useModalManager } from "../hooks/useModalManager";
 
 const TokenSwap = ({ isActive, balance }) => {
-  const { setShowModal, setShowTokenModal, showTokenModal }: any = useGlobal();
+  const { handleShowModal, handleTokenModal, showTokenModal }: any =
+    useModalManager();
   const [fromTokenAddress, setFromTokenAddress] = useState("");
   const [toTokenAddress, setToTokenAddress] = useState("");
   const [fromAmount, setFromAmount] = useState("");
@@ -76,7 +78,7 @@ const TokenSwap = ({ isActive, balance }) => {
     }
   }, [balance]);
 
-  const { selectedToToken }: any = useGlobal();
+  const { selectedToToken }: any = useModalManager();
 
   return (
     <div className="rounded-xl p-2 md:p-8 border-1 border-boundary border-solid bg-swap-box w-full md:w-1/2 mx-auto mt-12 space-y-4">
@@ -98,7 +100,7 @@ const TokenSwap = ({ isActive, balance }) => {
             <div className="rounded-full col-span-2 md:col-span-1 cursor-pointer bg-swap-token py-2 px-4 ml-auto mr-1 md:mr-4">
               <div
                 className="space-x-2 flex items-center w-max"
-                onClick={() => setShowTokenModal(true)}
+                onClick={() => handleTokenModal(true)}
               >
                 <p>{selectedToToken.shortName}</p>
                 <p className="text-xl">{selectedToToken.name}</p>
@@ -133,7 +135,7 @@ const TokenSwap = ({ isActive, balance }) => {
             {showTokenModal && (
               <Modal
                 title={"Select a token"}
-                onClose={() => setShowTokenModal(false)}
+                onClose={() => handleTokenModal(false)}
               >
                 <ChooseToken />
               </Modal>
@@ -192,7 +194,7 @@ const TokenSwap = ({ isActive, balance }) => {
         </div>
         <div className="pt-4">
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => handleShowModal(true)}
             className={`w-full py-4 rounded-xl ${
               isActive ? "bg-red-400" : "btn-connect"
             }`}

@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useGlobal } from "../hooks/useGlobal";
+import { useModalManager } from "../hooks/useModalManager";
 
 export default function ChooseToken() {
   const tokenLists = [
@@ -36,7 +35,7 @@ export default function ChooseToken() {
         "https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/polygon/assets/0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6/logo.png",
     },
   ];
-  const { setSelectedToToken, setShowTokenModal } = useGlobal();
+  const { setSelectedToToken, handleTokenModal }: any = useModalManager();
 
   return (
     <div>
@@ -47,7 +46,7 @@ export default function ChooseToken() {
               key={tokenList.id}
               onClick={() => {
                 setSelectedToToken(tokenList);
-                setShowTokenModal(false);
+                handleTokenModal(false);
               }}
               className="flex justify-between py-2 px-4 items-center hover:bg-swap-input-box rounded-xl space-y-2"
             >

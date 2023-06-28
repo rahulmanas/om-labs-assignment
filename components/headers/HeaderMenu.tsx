@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { hooks } from "../../connectors/metaMask";
-import { useGlobal } from "../../hooks/useGlobal";
+import { useModalManager } from "../../hooks/useModalManager";
 import { useBalances } from "../../hooks/useBalances";
 import { formatEther } from "@ethersproject/units";
 import { Status } from "../Status";
@@ -8,8 +8,8 @@ import { Status } from "../Status";
 const { useAccounts, useIsActive, useProvider, useIsActivating } = hooks;
 
 const Header = () => {
-  const { setShowModal } = useGlobal();
-  const [maxVal, setMaxVal] = useState(0);
+  const { handleShowModal }: any = useModalManager();
+  const [maxVal, setMaxVal] = useState("");
 
   const isActive = useIsActive();
   const accounts = useAccounts();
@@ -32,13 +32,13 @@ const Header = () => {
         {isActive ? (
           <button
             className="bg-red-600 text-red-200 py-1 px-4 rounded-full"
-            onClick={() => setShowModal(true)}
+            onClick={() => handleShowModal(true)}
           >
             Disconnect
           </button>
         ) : (
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => handleShowModal(true)}
             className="bg-red-600 text-red-200 py-1 px-4 rounded-full"
           >
             Connect

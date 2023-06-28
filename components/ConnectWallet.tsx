@@ -2,15 +2,15 @@ import React from "react";
 import MetaMaskCard from "./connectorCard/MetamaskCard";
 import Modal from "./Modal/Modal";
 
-import { useGlobal } from "../hooks/useGlobal";
 import { hooks } from "../connectors/metaMask";
 import { useBalances } from "../hooks/useBalances";
 import TokenSwap from "./TokenSwap";
+import { useModalManager } from "../hooks/useModalManager";
 
 const { useAccounts, useIsActive, useProvider } = hooks;
 
 export default function ConnectWallet() {
-  const { showModal, setShowModal }: any = useGlobal();
+  const { showModal, handleShowModal }: any = useModalManager();
 
   const isActive = useIsActive();
   const accounts = useAccounts();
@@ -23,7 +23,7 @@ export default function ConnectWallet() {
       {showModal && (
         <Modal
           title={"Connect Your Wallet"}
-          onClose={() => setShowModal(false)}
+          onClose={() => handleShowModal(false)}
         >
           <MetaMaskCard />
         </Modal>

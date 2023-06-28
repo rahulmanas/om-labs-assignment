@@ -5,8 +5,8 @@ import type { MetaMask } from "@web3-react/metamask";
 import { useCallback, useEffect, useState } from "react";
 
 import { CHAINS, getAddChainParameters } from "../chains";
-import { useGlobal } from "../hooks/useGlobal";
 import { getName } from "../utils";
+import { useModalManager } from "../hooks/useModalManager";
 
 export function ConnectWithSelect({
   connector,
@@ -26,7 +26,7 @@ export function ConnectWithSelect({
   setError: (error: Error | undefined) => void;
 }) {
   const [desiredChainId, setDesiredChainId] = useState<number>(undefined);
-  const { setShowModal }: any = useGlobal();
+  const { handleShowModal }: any = useModalManager();
 
   /**
    * When user connects eagerly (`desiredChainId` is undefined) or to the default chain (`desiredChainId` is -1),
@@ -56,7 +56,7 @@ export function ConnectWithSelect({
         } else {
           await connector.activate(getAddChainParameters(desiredChainId));
         }
-        setShowModal(false);
+        handleShowModal(false);
         setError(undefined);
       } catch (error) {
         setError(error);
@@ -82,7 +82,7 @@ export function ConnectWithSelect({
               } else {
                 void connector.resetState();
               }
-              setShowModal(false);
+              handleShowModal(false);
               setDesiredChainId(undefined);
             }}
           >
