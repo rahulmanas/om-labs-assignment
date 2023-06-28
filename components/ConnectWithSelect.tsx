@@ -6,43 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { CHAINS, getAddChainParameters } from "../chains";
 import { useGlobal } from "../hooks/useGlobal";
-
-function ChainSelect({
-  activeChainId,
-  switchChain,
-  chainIds,
-}: {
-  activeChainId: number;
-  switchChain: (chainId: number) => void;
-  chainIds: number[];
-}) {
-  return (
-    <select
-      value={activeChainId}
-      className=" p-4 border-2 rounded-md border-solid border-black bg-swap-input-box"
-      onChange={(event) => {
-        switchChain(Number(event.target.value));
-      }}
-      disabled={switchChain === undefined}
-    >
-      <option hidden disabled selected={activeChainId === undefined}>
-        Select chain
-      </option>
-      <option value={-1} selected={activeChainId === -1}>
-        Default
-      </option>
-      {chainIds.map((chainId) => (
-        <option
-          key={chainId}
-          value={chainId}
-          selected={chainId === activeChainId}
-        >
-          {CHAINS[chainId]?.name ?? chainId}
-        </option>
-      ))}
-    </select>
-  );
-}
+import { getName } from "../utils";
 
 export function ConnectWithSelect({
   connector,
@@ -69,10 +33,8 @@ export function ConnectWithSelect({
    * update the `desiredChainId` value so that <select /> has the right selection.
    */
   useEffect(() => {
-    if (activeChainId && (!desiredChainId || desiredChainId === -1)) {
-      setDesiredChainId(activeChainId);
-    }
-  }, [desiredChainId, activeChainId]);
+    setDesiredChainId(chainIds[0]);
+  }, []);
 
   const switchChain = useCallback(
     async (desiredChainId: number) => {
@@ -94,7 +56,7 @@ export function ConnectWithSelect({
         } else {
           await connector.activate(getAddChainParameters(desiredChainId));
         }
-
+        setShowModal(false);
         setError(undefined);
       } catch (error) {
         setError(error);
@@ -105,12 +67,7 @@ export function ConnectWithSelect({
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <ChainSelect
-        activeChainId={desiredChainId}
-        switchChain={switchChain}
-        chainIds={chainIds}
-      />
-      <div style={{ marginBottom: "1rem" }} />
+      <div className="mb-2" />
       {isActive ? (
         error ? (
           <button onClick={() => switchChain(desiredChainId)}>
@@ -118,14 +75,14 @@ export function ConnectWithSelect({
           </button>
         ) : (
           <button
-            className="cursor-pointer bg-red-500 py-2 rounded-xl text-white font-bold"
+            className="cursor-pointer bg-red-500 py-2 rounded-xl text-black font-bold"
             onClick={() => {
               if (connector?.deactivate) {
                 void connector.deactivate();
               } else {
                 void connector.resetState();
               }
-              // setShowModal(false);
+              setShowModal(false);
               setDesiredChainId(undefined);
             }}
           >
@@ -136,9 +93,9 @@ export function ConnectWithSelect({
         <button
           onClick={() => switchChain(desiredChainId)}
           disabled={isActivating || !desiredChainId}
-          className="bg-green-500 py-2 rounded-xl text-white font-bold"
+          className="bg-green-500 py-2 rounded-xl text-black font-bold"
         >
-          {error ? "Try again?" : "Connect"}
+          {error ? "Try again?" : `Connect to ${getName(connector)}`}
         </button>
       )}
     </div>

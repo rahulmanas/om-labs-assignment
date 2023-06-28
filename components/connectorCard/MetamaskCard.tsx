@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-
-// import { hooks, metaMask } from "../../connectors/metaMask.ts";
+import { useState } from "react";
 import { Card } from "../Card";
 import { metaMask, hooks } from "../../connectors/metaMask";
 

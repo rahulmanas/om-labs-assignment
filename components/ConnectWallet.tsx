@@ -1,10 +1,11 @@
 import React from "react";
 import MetaMaskCard from "./connectorCard/MetamaskCard";
 import Modal from "./Modal/Modal";
-import TokenSwap from "./TokenSwap";
+
 import { useGlobal } from "../hooks/useGlobal";
 import { hooks } from "../connectors/metaMask";
 import { useBalances } from "../hooks/useBalances";
+import TokenSwap from "./TokenSwap";
 
 const { useAccounts, useIsActive, useProvider } = hooks;
 
@@ -18,12 +19,15 @@ export default function ConnectWallet() {
 
   return (
     <div className="text-white space-y-8 md:space-y-6">
+      <TokenSwap isActive={isActive} balance={balances} />
       {showModal && (
-        <Modal title={"Connect "} onClose={() => setShowModal(false)}>
+        <Modal
+          title={"Connect Your Wallet"}
+          onClose={() => setShowModal(false)}
+        >
           <MetaMaskCard />
         </Modal>
       )}
-      {<TokenSwap isActive={isActive} balance={balances} />}
     </div>
   );
 }

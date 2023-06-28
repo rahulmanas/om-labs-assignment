@@ -14,12 +14,12 @@ import { formatEther } from "@ethersproject/units";
 import Modal from "./Modal/Modal";
 
 const TokenSwap = ({ isActive, balance }) => {
-  const { setShowModal, setShowTokenModal, showTokenModal } = useGlobal();
+  const { setShowModal, setShowTokenModal, showTokenModal }: any = useGlobal();
   const [fromTokenAddress, setFromTokenAddress] = useState("");
   const [toTokenAddress, setToTokenAddress] = useState("");
   const [fromAmount, setFromAmount] = useState("");
   const [toAmount, setToAmount] = useState("");
-  const [maxVal, setMaxVal] = useState(0);
+  const [maxVal, setMaxVal] = useState("");
 
   const handleFromTokenChange = (e) => {
     setFromTokenAddress(e.target.value);
@@ -76,7 +76,7 @@ const TokenSwap = ({ isActive, balance }) => {
     }
   }, [balance]);
 
-  const { selectedToToken } = useGlobal();
+  const { selectedToToken }: any = useGlobal();
 
   return (
     <div className="rounded-xl p-2 md:p-8 border-1 border-boundary border-solid bg-swap-box w-full md:w-1/2 mx-auto mt-12 space-y-4">
@@ -108,7 +108,7 @@ const TokenSwap = ({ isActive, balance }) => {
                   viewBox="0 0 12 7"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  class="sc-3zewi2-8 cnYyzy"
+                  className="sc-3zewi2-8 cnYyzy"
                 >
                   <path
                     d="M0.97168 1L6.20532 6L11.439 1"
@@ -140,11 +140,11 @@ const TokenSwap = ({ isActive, balance }) => {
             )}
           </div>
         </div>
-        <div class="sc-11ce2lf-2 fcplJw">
+        <div className="sc-11ce2lf-2 fcplJw">
           <div
             data-testid="swap-currency-button"
             color="#FFFFFF"
-            class="sc-1es900k-0 jhKFEw"
+            className="sc-1es900k-0 jhKFEw"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +182,7 @@ const TokenSwap = ({ isActive, balance }) => {
                 viewBox="0 0 12 7"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                class="sc-3zewi2-8 cnYyzy"
+                className="sc-3zewi2-8 cnYyzy"
               >
                 <path d="M0.97168 1L6.20532 6L11.439 1" stroke="#AEAEAE"></path>
               </svg>
