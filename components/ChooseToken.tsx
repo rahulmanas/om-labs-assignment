@@ -1,3 +1,4 @@
+import React from "react";
 import { useModalManager } from "../hooks/useModalManager";
 
 export default function ChooseToken() {

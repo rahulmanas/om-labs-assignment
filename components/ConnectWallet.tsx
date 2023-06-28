@@ -10,7 +10,7 @@ import { useModalManager } from "../hooks/useModalManager";
 const { useAccounts, useIsActive, useProvider } = hooks;
 
 export default function ConnectWallet() {
-  const { showModal, handleShowModal }: any = useModalManager();
+  const { showModal, handleShowModal }:any = useModalManager();
 
   const isActive = useIsActive();
   const accounts = useAccounts();
