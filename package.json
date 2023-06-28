@@ -1,6 +1,6 @@
 {
   "name": "om-labs-rahul-assignment",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "dev": "next",
     "build": "rm -rf dist && NODE_ENV=production babel ./components/lib/index.js --out-dir dist --copy-files",
